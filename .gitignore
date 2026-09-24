@@ -1,0 +1,5 @@
+# Publish only the presentation. Everything else (paper, reviews, drafts) stays local.
+*
+!.gitignore
+!index.html
+!presentation.html

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GenAI at the Middle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+  /* Deliberately single light theme: tuned for projectors. */
+  :root {
+    color-scheme: light;
+    --ink: #17212B;
+    --ink-soft: #4A5663;
+    --ink-faint: #8A949E;
+    --paper: #F5F6F3;
+    --rule: #D5D9D3;
+    --social: #0E6E66;
+    --technical: #B4761B;
+    --tint-social: #DCEBE8;
+    --tint-technical: #F3E6CF;
+    --backdrop: #2A333C;
+
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--backdrop); color: var(--ink); font-family: var(--sans); overflow: hidden; }
+  p { margin: 0; }
+
+  /* 16:9 stage, authored at 1600x900 and scaled to fit */
+  .viewport { position: fixed; inset: 0; overflow: hidden; }
+  .stage { width: 1600px; height: 900px; position: absolute; left: 50%; top: 50%; transform-origin: center center; }
+  .slide {
+    position: absolute; inset: 0; background: var(--paper);
+    padding: 88px 120px 110px; display: none; flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-soft); display: flex; gap: 18px; align-items: center;
+  }
+  .eyebrow .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--social); }
+  .foot {
+    position: absolute; left: 120px; right: 120px; bottom: 40px;
+    display: flex; justify-content: space-between; gap: 24px;
+    font-family: var(--mono); font-size: 15px; color: var(--ink-faint);
+    border-top: 1px solid var(--rule); padding-top: 14px;
+  }
+  h1 { font-family: var(--serif); font-weight: 600; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  .cite { font-family: var(--mono); font-size: 15px; color: var(--ink-faint); line-height: 1.5; }
+  .lab { font-family: var(--mono); font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .center { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+  /* 1 · Title */
+  .title-slide { justify-content: space-between; }
+  .title-slide h1 { font-size: 88px; line-height: 1.04; max-width: 1180px; margin-top: 36px; }
+  .title-slide h1 .sub { display: block; font-weight: 400; font-style: italic; color: var(--ink-soft); font-size: 58px; margin-top: 18px; }
+  .bands { display: grid; gap: 14px; }
+  .band {
+    height: 52px; border-radius: 3px; display: flex; align-items: center; padding-inline: 22px;
+    font-family: var(--mono); font-size: 17px; letter-spacing: 0.06em; text-transform: uppercase; width: 76%;
+  }
+  .band.social { background: var(--tint-social); color: var(--social); border-left: 6px solid var(--social); }
+  .band.technical { background: var(--tint-technical); color: #7A4E0E; border-left: 6px solid var(--technical); margin-left: 14%; }
+  .meta .who { font-size: 30px; font-weight: 600; }
+  .meta .where { font-size: 22px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* 2 · RQ */
+  .rq { font-family: var(--serif); font-size: 84px; line-height: 1.2; font-weight: 400; max-width: 1320px; text-wrap: balance; }
+  .rq b { font-weight: 600; }
+  .rq .mm { color: var(--social); }
+  .rq .mis { box-shadow: inset 0 -0.2em 0 var(--tint-technical); }
+
+  /* 3 · Phenomenon / Theory / Method */
+  .ptm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; margin-top: 72px; }
+  .ptm article { border-top: 8px solid var(--c); padding-top: 26px; display: flex; flex-direction: column; gap: 22px; }
+  .ptm .lab { color: var(--c); }
+  .ptm .msg { font-family: var(--serif); font-size: 38px; line-height: 1.22; text-wrap: balance; }
+  .ptm .msg b { font-weight: 600; }
+  .ptm .phen { --c: var(--social); }
+  .ptm .theo { --c: var(--technical); }
+  .ptm .meth { --c: var(--ink); }
+
+  /* 4 · Gap */
+  .gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center; flex: 1; }
+  .levels { display: grid; gap: 16px; }
+  .level {
+    height: 112px; border-radius: 6px; padding-inline: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: #E6E9E5; color: var(--ink-soft);
+  }
+  .level .name { font-size: 28px; font-weight: 600; color: var(--ink); }
+  .level .state { font-family: var(--mono); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .level.gap { background: transparent; border: 3px dashed var(--social); }
+  .level.gap .name, .level.gap .state { color: var(--social); }
+  .gap-side { display: flex; flex-direction: column; gap: 28px; }
+  .gap-msg { font-family: var(--serif); font-size: 46px; line-height: 1.22; text-wrap: balance; }
+  .gap-msg b { font-weight: 600; color: var(--social); }
+
+  /* 5 · Problematization */
+  .contrast { display: grid; grid-template-columns: 1fr 1fr; margin-top: 56px; flex: 1; align-items: start; }
+  .contrast > div { padding: 32px 48px 32px 0; display: flex; flex-direction: column; gap: 24px; }
+  .contrast .ours { padding-left: 48px; padding-right: 0; border-left: 3px solid var(--social); }
+  .contrast .lab { color: var(--ink-soft); }
+  .contrast .ours .lab { color: var(--social); }
+  .contrast .text { font-family: var(--serif); font-size: 46px; line-height: 1.22; text-wrap: balance; }
+  .contrast .assumed .text { color: var(--ink-soft); }
+  .contrast .ours .text b { color: var(--social); font-weight: 600; }
+  .sowhat { font-size: 26px; line-height: 1.4; max-width: 1200px; margin-bottom: 8px; }
+  .sowhat .lab { color: var(--technical); margin-right: 16px; }
+
+  /* References */
+  .refs { columns: 2; column-gap: 72px; margin-top: 36px; font-size: 18px; line-height: 1.45; }
+  .refs p { break-inside: avoid; margin-bottom: 14px; padding-left: 26px; text-indent: -26px; }
+
+  /* controls */
+  .progress { position: fixed; left: 0; bottom: 0; height: 4px; background: var(--social); transition: width .3s ease; }
+  .hint { position: fixed; right: 16px; bottom: 12px; font-family: var(--mono); font-size: 12px; color: #9AA5AF; opacity: .75; }
+  @media (prefers-reduced-motion: reduce) { .progress { transition: none; } }
+  @media print {
+    body { background: #fff; overflow: visible; }
+    .viewport { position: static; }
+    .stage { transform: none !important; position: static; }
+    .slide { display: flex !important; position: relative; page-break-after: always; }
+    .progress, .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <!-- 1 · Title -->
+    <section class="slide title-slide active" aria-label="Title">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Research project · Seminar presentation</div>
+        <h1>GenAI adoption at the middle management<span class="sub">A sociotechnical misalignment</span></h1>
+      </div>
+      <div class="bands" aria-hidden="true">
+        <div class="band social">Social subsystem — people · structure</div>
+        <div class="band technical">Technical subsystem — technology · task</div>
+      </div>
+      <div class="meta">
+        <div class="who">Michele Baumann</div>
+        <div class="where">Research Project and Scientific Publishing A</div>
+      </div>
+    </section>
+
+    <!-- 2 · Research question -->
+    <section class="slide" aria-label="Research question">
+      <div class="eyebrow"><span class="dot"></span>Research question</div>
+      <div class="center">
+        <p class="rq">How do <b class="mm">middle managers</b> experience <span class="mis">sociotechnical misalignment</span> during generative AI adoption?</p>
+      </div>
+      <div class="foot"><span>M. Baumann · GenAI adoption at the middle management</span><span class="num"></span></div>
+    </section>
+
+    <!-- 3 · Phenomenon, theory, method -->
+    <section class="slide" aria-label="Unpacking the research question">
+      <div class="eyebrow"><span class="dot"></span>Unpacking the research question</div>
+      <div class="ptm">
+        <article class="phen">
+          <span class="lab">Phenomenon</span>
+          <p class="msg">GenAI value stalls where <b>strategic ambition meets operational reality</b>: in the middle.</p>
+          <p class="cite">Floyd &amp; Wooldridge (1992); Huy (2001)</p>
+        </article>
+        <article class="theo">
+          <span class="lab">Theory</span>
+          <p class="msg"><b>Sociotechnical systems</b>: adoption problems are gaps between people, structure, task and technology.</p>
+          <p class="cite">Bostrom &amp; Heinen (1977); Lyytinen &amp; Newman (2008)</p>
+        </article>
+        <article class="meth">
+          <span class="lab">Method</span>
+          <p class="msg"><b>Semi-structured interviews</b> with middle managers, analysed inductively.</p>
+          <p class="cite">Gioia et al. (2013)</p>
+        </article>
+      </div>
+      <div class="foot"><span>M. Baumann · GenAI adoption at the middle management</span><span class="num"></span></div>
+    </section>
+
+    <!-- 4 · Research gap -->
+    <section class="slide" aria-label="Research gap">
+      <div class="eyebrow"><span class="dot"></span>Research gap</div>
+      <div class="gap-grid">
+        <div class="levels" aria-label="GenAI adoption research by organisational level">
+          <div class="level"><span class="name">Top management</span><span class="state">Well studied</span></div>
+          <div class="level gap"><span class="name">Middle management</span><span class="state">Largely missing</span></div>
+          <div class="level"><span class="name">Employees</span><span class="state">Well studied</span></div>
+        </div>
+        <div class="gap-side">
+          <p class="gap-msg">GenAI adoption research looks above and below the middle, but <b>rarely at middle managers</b>.</p>
+          <p class="cite">e.g. Prasad Agrawal (2023); Hammerschmidt et al. (2024); Noy &amp; Zhang (2023). First steps: Jean-Baptiste (2025)</p>
+        </div>
+      </div>
+      <div class="foot"><span>M. Baumann · GenAI adoption at the middle management</span><span class="num"></span></div>
+    </section>
+
+    <!-- 5 · Problematization -->
+    <section class="slide" aria-label="Problematization">
+      <div class="eyebrow"><span class="dot"></span>Problematization</div>
+      <div class="contrast">
+        <div class="assumed">
+          <span class="lab">Prevailing assumption</span>
+          <p class="text">Middle managers simply implement the GenAI decisions made above them.</p>
+        </div>
+        <div class="ours">
+          <span class="lab">This study</span>
+          <p class="text">Middle managers are <b>where misalignment surfaces</b> and where it is resolved.</p>
+        </div>
+      </div>
+      <p class="sowhat"><span class="lab">Why it matters</span>This helps explain why GenAI so often fails to move beyond the pilot stage.</p>
+      <div class="foot"><span>M. Baumann · GenAI adoption at the middle management</span><span>Problematization after Alvesson &amp; Sandberg (2011) · <span class="num"></span></span></div>
+    </section>
+
+    <!-- References -->
+    <section class="slide" aria-label="References">
+      <div class="eyebrow"><span class="dot"></span>References</div>
+      <div class="refs">
+        <p>Alvesson, M., &amp; Sandberg, J. (2011). Generating research questions through problematization. <i>Academy of Management Review, 36</i>(2), 247–271.</p>
+        <p>Bostrom, R. P., &amp; Heinen, J. S. (1977). MIS problems and failures: A socio-technical perspective. Part I: The causes. <i>MIS Quarterly, 1</i>(3), 17–32.</p>
+        <p>Floyd, S. W., &amp; Wooldridge, B. (1992). Middle management involvement in strategy and its association with strategic type: A research note. <i>Strategic Management Journal, 13</i>(S1), 153–167.</p>
+        <p>Gioia, D. A., Corley, K. G., &amp; Hamilton, A. L. (2013). Seeking qualitative rigor in inductive research. <i>Organizational Research Methods, 16</i>(1), 15–31.</p>
+        <p>Hammerschmidt, T., Stolz, K. A., &amp; Posegga, O. (2024). How leaders' ambidexterity and literacy impact the AI capabilities of organizations. <i>ECIS 2024 Proceedings</i>, 14.</p>
+        <p>Huy, Q. N. (2001). In praise of middle managers. <i>Harvard Business Review, 79</i>(8), 72–79.</p>
+        <p>Jean-Baptiste, P. (2025). Transformations in the roles and skills of middle managers in the era of generative AI: An activity theory perspective. <i>AMCIS 2025 Proceedings</i>, 20.</p>
+        <p>Lyytinen, K., &amp; Newman, M. (2008). Explaining information systems change: A punctuated socio-technical change model. <i>European Journal of Information Systems, 17</i>(6), 589–613.</p>
+        <p>Noy, S., &amp; Zhang, W. (2023). Experimental evidence on the productivity effects of generative artificial intelligence. <i>Science, 381</i>(6654), 187–192.</p>
+        <p>Prasad Agrawal, K. (2023). Towards adoption of generative AI in organizational settings. <i>Journal of Computer Information Systems, 64</i>(5), 636–651.</p>
+      </div>
+      <div class="foot"><span>M. Baumann · GenAI adoption at the middle management</span><span class="num"></span></div>
+    </section>
+
+  </div>
+</div>
+<div class="progress" id="progress"></div>
+<div class="hint">← → to navigate · F for fullscreen</div>
+
+<script>
+(function () {
+  var stage = document.getElementById('stage');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var progress = document.getElementById('progress');
+  var i = 0;
+
+  function fit() {
+    var s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (el, k) { el.classList.toggle('active', k === i); });
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+  }
+  slides.forEach(function (el, k) {
+    var num = el.querySelector('.num');
+    if (num) num.textContent = (k + 1) + ' / ' + slides.length;
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].indexOf(e.key) > -1) { e.preventDefault(); show(i + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) > -1) { e.preventDefault(); show(i - 1); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen().catch(function () {}); }
+      else { document.exitFullscreen && document.exitFullscreen(); }
+    }
+  });
+  document.addEventListener('click', function (e) {
+    show(e.clientX > window.innerWidth / 2 ? i + 1 : i - 1);
+  });
+
+  window.addEventListener('resize', fit);
+  fit();
+  var start = parseInt((location.hash || '').slice(1), 10);
+  show(isNaN(start) ? 0 : start - 1);
+})();
+</script>
+</body>
+</html>
