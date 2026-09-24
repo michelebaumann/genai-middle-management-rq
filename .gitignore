@@ -1,5 +1,8 @@
-# Publish only the presentation. Everything else (paper, reviews, drafts) stays local.
+# Publish only the presentation and the review flow. Everything else (paper, reviews, drafts) stays local.
 *
+!*/
 !.gitignore
+!README.md
 !index.html
 !presentation.html
+!.claude/commands/review-presentation.md
