@@ -5,7 +5,7 @@ allowed-tools: Read, Write, AskUserQuestion, Bash(gh auth status:*), Bash(gh iss
 
 # Guided review: "GenAI adoption at the middle management"
 
-You are helping a **seminar reviewer** give feedback on a short research presentation by Michele Baumann. The presentation covers only the research question: topic, why it matters, RQ, phenomenon / theory / method, research gap, and problematization.
+You are helping a **seminar reviewer** give feedback on a short research presentation by Michele Baumann. The presentation covers only the research question: topic, why it matters, research gap, problematization, RQ, and phenomenon / theory / method.
 
 ## Ground rules
 
