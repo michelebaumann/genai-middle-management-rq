@@ -1,8 +1,8 @@
-# GenAI adoption at the middle management
+# GenAI Adoption at the Middle Management
 
 **Research question:** How do middle managers experience sociotechnical misalignment during generative AI adoption?
 
-Seminar presentation by Michele Baumann for *Research Project and Scientific Publishing A*.
+Presentation for the ECIS Call for Submissions by Michele Baumann (*Research Project and Scientific Publishing A*).
 
 ▶ **Presentation:** https://michelebaumann.github.io/genai-middle-management-rq/
 Use the arrow keys or click to move between slides. Press F for fullscreen.
@@ -30,3 +30,9 @@ It takes about 10 minutes. You choose how the feedback reaches me:
 The flow is defined in [`.claude/commands/review-presentation.md`](.claude/commands/review-presentation.md), so you can read exactly what it does before running it. Nothing is sent without your explicit approval. The notification contains no feedback text and no reviewer identity.
 
 Prefer to write feedback by hand? [Open an issue](https://github.com/michelebaumann/genai-middle-management-rq/issues/new).
+
+---
+
+<img src="repo-qr.svg" alt="QR code linking to the GitHub repository" width="140">
+
+Scan to open this repository: https://github.com/michelebaumann/genai-middle-management-rq
