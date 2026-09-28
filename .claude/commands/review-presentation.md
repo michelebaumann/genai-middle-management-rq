@@ -5,7 +5,7 @@ allowed-tools: Read, Write, AskUserQuestion, Bash(gh auth status:*), Bash(gh iss
 
 # Guided review: "GenAI adoption at the middle management"
 
-You are helping a **seminar reviewer** give feedback on a short research presentation by Michele Baumann. The presentation covers only the research question: topic, RQ, phenomenon / theory / method, research gap, and problematization.
+You are helping a **seminar reviewer** give feedback on a short research presentation by Michele Baumann. The presentation covers only the research question: topic, why it matters, RQ, phenomenon / theory / method, research gap, and problematization.
 
 ## Ground rules
 
@@ -37,9 +37,9 @@ For each criterion below:
 Criteria:
 
 1. **Research question.** Is it clear, focused, answerable, and does "experience" fit a qualitative design?
-2. **Phenomenon · Theory · Method fit.** Do the phenomenon (value stalls in the middle), the theory (sociotechnical systems: gaps between people, structure, task, technology) and the method (semi-structured interviews, inductive analysis) fit together and follow from the RQ?
-3. **Research gap.** Is the claim that research looks "above and below the middle" convincing and adequately supported by the cited work?
-4. **Problematization.** Does the slide challenge a genuine assumption (in the sense of Alvesson & Sandberg, 2011), or is it gap-spotting in disguise? Is the alternative view defensible?
+2. **Phenomenon · Theory · Method fit.** Do the phenomenon (GenAI value stalls in the middle; stakes on the "Why it matters" slide), the theory (sociotechnical systems as a sensitising lens; misalignment as a perceived gap between people, structure, task, technology) and the method (semi-structured interviews, abductive analysis) fit together and follow from the RQ?
+3. **Research gap.** Is the claim that GenAI adoption research looks "above and below the middle" convincing, is each level adequately supported by the cited work, and is the study clearly distinguished from Jean-Baptiste (2025)?
+4. **Problematization.** Does the slide challenge a genuine assumption of GenAI adoption research (in the sense of Alvesson & Sandberg, 2011), or is it gap-spotting in disguise? Is the alternative view defensible?
 5. **Presentation.** Are the slides clear and focused, and do they carry the argument on their own?
 
 ## Step 3: Overall
