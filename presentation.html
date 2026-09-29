@@ -131,6 +131,11 @@
   .sowhat { font-size: 26px; line-height: 1.4; max-width: 1200px; margin-bottom: 8px; }
   .sowhat .lab { color: var(--technical); margin-right: 16px; }
 
+  /* 7 · Spears */
+  .spears-slide { padding: 0; }
+  .spears-slide svg { width: 100%; height: 100%; display: block; }
+  .spears-slide h1 { position: absolute; top: 72px; left: 0; right: 0; text-align: center; font-size: 84px; }
+
   /* References */
   .refs { columns: 2; column-gap: 72px; margin-top: 36px; font-size: 18px; line-height: 1.45; }
   .refs p { break-inside: avoid; margin-bottom: 14px; padding-left: 26px; text-indent: -26px; }
@@ -263,6 +268,52 @@
         </article>
       </div>
       <div class="foot"><span>M. Baumann · GenAI Adoption at the Middle Management</span><span class="num"></span></div>
+    </section>
+
+    <!-- 7 · Discussion: ready for spears (Sinek) -->
+    <section class="slide spears-slide" aria-label="Discussion: ready for your spears">
+      <h1>Ready for your spears.</h1>
+      <svg viewBox="0 0 1600 900" role="img" aria-label="A presenter stands with open arms as spears fly in; two have already hit.">
+        <defs>
+          <g id="spear">
+            <line x1="-380" y1="0" x2="-70" y2="0" stroke="var(--technical)" stroke-width="8" stroke-linecap="round"/>
+            <path d="M-84 0 Q-48 -22 0 0 Q-48 22 -84 0 Z" fill="var(--ink)"/>
+          </g>
+          <g id="whoosh" stroke="var(--ink-faint)" stroke-width="3" stroke-linecap="round" stroke-dasharray="14 12">
+            <line x1="-520" y1="-16" x2="-400" y2="-16"/>
+            <line x1="-560" y1="0" x2="-400" y2="0"/>
+            <line x1="-510" y1="16" x2="-400" y2="16"/>
+          </g>
+        </defs>
+
+        <g transform="translate(0 50)">
+        <!-- incoming -->
+        <g transform="translate(640 300) rotate(9)"><use href="#whoosh"/><use href="#spear"/></g>
+        <g transform="translate(560 520) rotate(4)"><use href="#whoosh"/><use href="#spear"/></g>
+        <g transform="translate(700 700) rotate(14)"><use href="#whoosh"/><use href="#spear"/></g>
+
+        <!-- stuck in the ground -->
+        <g transform="translate(1000 800) rotate(58)"><use href="#spear"/></g>
+        <g transform="translate(1270 800) rotate(122)"><use href="#spear"/></g>
+
+        <!-- presenter -->
+        <g stroke="var(--ink)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <circle cx="1120" cy="330" r="42" fill="var(--paper)"/>
+          <path d="M1104 342 q16 14 32 0" stroke-width="5"/>
+          <line x1="1120" y1="374" x2="1120" y2="560"/>
+          <polyline points="1030,330 1060,400 1120,420 1180,400 1210,330"/>
+          <polyline points="1070,735 1120,560 1170,735"/>
+        </g>
+
+        <!-- hits -->
+        <g transform="translate(1156 458) rotate(10)"><use href="#spear"/></g>
+        <g transform="translate(1154 526) rotate(3)"><use href="#spear"/></g>
+
+        <!-- ground -->
+        <rect x="0" y="740" width="1600" height="160" fill="var(--paper)"/>
+        <line x1="240" y1="740" x2="1400" y2="740" stroke="var(--rule)" stroke-width="4" stroke-linecap="round"/>
+        </g>
+      </svg>
     </section>
 
     <!-- References -->
