@@ -1,8 +1,8 @@
 # GenAI Adoption at the Middle Management
 
-**Research question:** How do middle managers experience sociotechnical misalignment during generative AI adoption?
+**Research question:** How do middle managers experience and navigate the challenges of generative AI adoption?
 
-Presentation for the ECIS Call for Submissions by Michele Baumann (*Research Project and Scientific Publishing A*).
+Presentation of the ECIS 2027 paper draft *Buffering, Bridging and Sensegiving* (introduction to research design) by Michele Baumann (*Research Project and Scientific Publishing A*).
 
 ▶ **Presentation:** https://michelebaumann.github.io/genai-middle-management-rq/
 Use the arrow keys or click to move between slides. Press F for fullscreen.
